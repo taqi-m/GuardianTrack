@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GuardianTrack</string>
+    <string name="notification_channel_tracking_name">Location Tracking Service</string>
+    <string name="notification_channel_tracking_description">Ongoing background location tracking updates</string>
+    <string name="notification_channel_geofence_name">Geofence Alerts</string>
+    <string name="notification_channel_geofence_description">Real-time alerts triggered on geofence transitions</string>
+    <string name="notification_tracking_title">GuardianTrack Active</string>
+    <string name="notification_tracking_content">Background tracking active • Precision mode</string>
+</resources>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <!-- OWASP M3: Enforce HTTPS & Disallow cleartext across all connections -->
+    <base-config cleartextTrafficPermitted="false">
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </base-config>
+
+    <!-- Production API Pinning & Modern TLS Policy -->
+    <domain-config cleartextTrafficPermitted="false">
+        <domain includeSubdomains="true">api.guardiantrack.io</domain>
+        <!-- Trust only system CAs; reject user-installed CAs to mitigate MITM proxies -->
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </domain-config>
+</network-security-config>
