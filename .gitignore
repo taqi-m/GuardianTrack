@@ -1,0 +1,35 @@
+# Android / Kotlin
+*.apk
+*.aab
+*.ap_
+*.dex
+*.class
+bin/
+gen/
+out/
+build/
+.gradle/
+
+# Local Crash & JBR Replay Logs
+*.log
+app/*.log
+hs_err_pid*
+replay_pid*
+app/hs_err_pid*
+app/replay_pid*
+
+# IDE & Editor
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+local.properties
+.DS_Store
+Thumbs.db
+capture/
+
+# Secrets & Keys
+*.jks
+*.keystore
+google-services.json
