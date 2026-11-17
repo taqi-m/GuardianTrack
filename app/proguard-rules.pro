@@ -12,6 +12,28 @@
 -keepattributes SourceFile,LineNumberTable
 
 # ---------------------------------------------------------
+# OWASP M4 / Privacy: Production Log Stripping
+# ---------------------------------------------------------
+-assumenosideeffects class android.util.Log {
+    public static boolean isLoggable(java.lang.String, int);
+    public static int v(...);
+    public static int d(...);
+    public static int i(...);
+    public static int w(...);
+    public static int e(...);
+    public static int wtf(...);
+}
+
+# Strip OkHttp Logging Interceptor calls in release builds
+-assumenosideeffects class okhttp3.logging.HttpLoggingInterceptor {
+    public okhttp3.logging.HttpLoggingInterceptor setLevel(okhttp3.logging.HttpLoggingInterceptor$Level);
+}
+
+# Strip Timber logging calls if introduced
+-assumenosideeffects class timber.log.Timber { *; }
+-assumenosideeffects class timber.log.Timber$Forest { *; }
+
+# ---------------------------------------------------------
 # Kotlin Coroutines
 # ---------------------------------------------------------
 -keepnames class kotlinx.coroutines.internal.MainDispatcherFactory {}

@@ -14,5 +14,12 @@
         <trust-anchors>
             <certificates src="system" />
         </trust-anchors>
+        <!-- Public-Key-Pins: Primary + Backup Pin for TLS Certificate Rotation -->
+        <pin-set expiration="2026-12-31">
+            <!-- Primary Pin (SHA-256 of SubjectPublicKeyInfo for api.guardiantrack.io) -->
+            <pin digest="SHA-256">47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=</pin>
+            <!-- Backup Pin (Standby Root/Intermediate for zero-downtime rotation) -->
+            <pin digest="SHA-256">++MBgDH5WGvL9Bcn5Be30cRcL0f5O+NyoXuWtQdX1aI=</pin>
+        </pin-set>
     </domain-config>
 </network-security-config>
