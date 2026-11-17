@@ -7,11 +7,13 @@ import com.guardiantrack.core.database.dao.GeofenceDao
 import com.guardiantrack.core.database.dao.GeofenceEventDao
 import com.guardiantrack.core.database.dao.LocationDao
 import com.guardiantrack.core.database.dao.TelemetryDao
+import com.guardiantrack.core.database.security.DatabaseKeyManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import net.zetetic.database.sqlcipher.SupportOpenHelperFactory
 import javax.inject.Singleton
 
 @Module
@@ -21,13 +23,18 @@ object DatabaseModule {
     @Provides
     @Singleton
     fun provideGuardianDatabase(
-        @ApplicationContext context: Context
+        @ApplicationContext context: Context,
+        keyManager: DatabaseKeyManager
     ): GuardianDatabase {
+        val passphrase = keyManager.getOrCreatePassphrase()
+        val factory = SupportOpenHelperFactory(passphrase)
+
         return Room.databaseBuilder(
             context,
             GuardianDatabase::class.java,
             GuardianDatabase.DATABASE_NAME
         )
+            .openHelperFactory(factory)
             .fallbackToDestructiveMigration(dropAllTables = true)
             .build()
     }
