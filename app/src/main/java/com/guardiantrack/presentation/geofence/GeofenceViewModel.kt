@@ -87,6 +87,28 @@ class GeofenceViewModel @Inject constructor(
             is GeofenceUiEvent.DeleteGeofence -> deleteGeofence(event.id)
             is GeofenceUiEvent.ToggleActive -> toggleGeofence(event.id, event.isActive)
             is GeofenceUiEvent.DismissMessage -> _userMessage.value = null
+            is GeofenceUiEvent.UseCurrentLocationClicked -> useCurrentLocation()
+        }
+    }
+
+    private fun useCurrentLocation() {
+        viewModelScope.launch(dispatchers.io) {
+            val location = try {
+                locationRepository.observeLatestLocation().first()
+            } catch (e: CancellationException) {
+                throw e
+            } catch (e: Exception) {
+                null
+            }
+
+            if (location != null) {
+                _dialogDraft.value = _dialogDraft.value.copy(
+                    lat = String.format(Locale.US, "%.5f", location.latitude),
+                    lng = String.format(Locale.US, "%.5f", location.longitude)
+                )
+            } else {
+                _userMessage.value = "Acquiring GPS fix... please try again shortly"
+            }
         }
     }
 

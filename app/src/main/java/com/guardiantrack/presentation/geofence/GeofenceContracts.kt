@@ -27,4 +27,5 @@ sealed interface GeofenceUiEvent {
     data class DeleteGeofence(val id: String) : GeofenceUiEvent
     data class ToggleActive(val id: String, val isActive: Boolean) : GeofenceUiEvent
     data object DismissMessage : GeofenceUiEvent
+    data object UseCurrentLocationClicked : GeofenceUiEvent
 }

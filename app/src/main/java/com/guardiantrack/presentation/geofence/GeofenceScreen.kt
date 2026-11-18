@@ -256,6 +256,19 @@ private fun AddGeofenceDialog(
                     modifier = Modifier.fillMaxWidth()
                 )
 
+                OutlinedButton(
+                    onClick = { onEvent(GeofenceUiEvent.UseCurrentLocationClicked) },
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.MyLocation,
+                        contentDescription = "Use Current Location",
+                        modifier = Modifier.size(18.dp)
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text("Use Current Location")
+                }
+
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     OutlinedTextField(
                         value = state.pendingLatitude,
